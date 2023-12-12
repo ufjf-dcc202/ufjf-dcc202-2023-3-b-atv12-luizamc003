@@ -19,14 +19,14 @@ updateScreen();
 
 function readForm(event) {
   event.preventDefault(event);
-  const quantity = document.entrada.quantity.valueAsNumber;
-  const fruit = document.entrada.fruit.value;
-  const source = document.entrada.source.value;
-  const destination = document.entrada.destination.value;
+  const quantidade = document.entrada.quantidade.valueAsNumber;
+  const fruta = document.entrada.fruta.value;
+  const origem = document.entrada.origem.value;
+  const destino = document.entrada.destino.value;
 
-  console.log(`${source} donates ${quantity} ${fruit} to ${destination}`);
+  console.log(`${origem} donates ${quantidade} ${fruta} to ${destino}`);
 
-  transactionInInventory(source, destination, fruit, quantity);
+  transactionInInventory(origem, destino, fruta, quantidade);
   updateScreen();
 }
 
@@ -36,7 +36,7 @@ function fillList(list, personInventory) {
   for (let i = 0; i < personInventory.length; i++) {
     const pile = personInventory[i];
     const li = document.createElement("li");
-    li.textContent = `${pile.type}: ${pile.quantity}`;
+    li.textContent = `${pile.type}: ${pile.quantidade}`;
     list.appendChild(li);
   }
 }
@@ -45,8 +45,8 @@ function updateScreen() {
   const inventory = getInventory();
   olJoao.innerHTML = "";
   olMaria.innerHTML = "";
-  document.entrada.quantity.value = 1;
-  document.entrada.fruit.value = "maca";
+  document.entrada.quantidade.value = 1;
+  document.entrada.fruta.value = "maca";
 
   console.log(inventory);
   if (inventory.joao && inventory.joao.length > 0) {

@@ -1,30 +1,30 @@
 let inventory = {
-  joao: [{ type: "maca", quantity: 1 }],
-  maria: [{ type: "maca", quantity: 2 }],
+  joao: [{ type: "maca", quantidade: 1 }],
+  maria: [{ type: "maca", quantidade: 2 }],
 };
 
 export function getInventory() {
   return structuredClone(inventory);
 }
 
-export function transactionInInventory(from, to, type, quantity) {
-  console.log(from, to, type, quantity);
+export function transactionInInventory(from, to, type, quantidade) {
+  console.log(from, to, type, quantidade);
   if (!inventory[from] && from !== "pomar") {
     inventory[from] = [];
   }
   if (!inventory[to] && to !== "pomar") {
     inventory[to] = [];
   }
-  if (quantity < 0 || from === to) return;
+  if (quantidade < 0 || from === to) return;
 
   if (to === "pomar") {
     let foundItem = inventory[from].find((item) => item.type === type);
 
     if (foundItem) {
-      if (foundItem.quantity >= quantity) {
-        foundItem.quantity = foundItem.quantity - quantity;
+      if (foundItem.quantidade >= quantidade) {
+        foundItem.quantidade = foundItem.quantidade - quantidade;
       } else {
-        foundItem.quantity = 0;
+        foundItem.quantidade = 0;
       }
     } else {
       return;
@@ -34,9 +34,9 @@ export function transactionInInventory(from, to, type, quantity) {
   if (from === "pomar") {
     const foundItem = inventory[to].find((item) => item.type === type);
     if (foundItem) {
-      foundItem.quantity += quantity;
+      foundItem.quantidade += quantidade;
     } else {
-      inventory[to].push({ type, quantity });
+      inventory[to].push({ type, quantidade });
     }
     console.log("inventory");
     console.log(inventory);
@@ -46,20 +46,20 @@ export function transactionInInventory(from, to, type, quantity) {
     let destinationItem = inventory[to].find((item) => item.type === type);
 
     if (!sourceItem) return;
-    else if (sourceItem.quantity < quantity) {
+    else if (sourceItem.quantidade < quantidade) {
       if (destinationItem) {
-        destinationItem.quantity += sourceItem.quantity;
+        destinationItem.quantidade += sourceItem.quantidade;
       } else {
-        inventory[to].push({ type: type, quantity: sourceItem.quantity });
+        inventory[to].push({ type: type, quantidade: sourceItem.quantidade });
       }
-      sourceItem.quantity = 0;
+      sourceItem.quantidade = 0;
     } else {
       if (destinationItem) {
-        destinationItem.quantity += quantity;
+        destinationItem.quantidade += quantidade;
       } else {
-        inventory[to].push({ type, quantity });
+        inventory[to].push({ type, quantidade });
       }
-      sourceItem.quantity = sourceItem.quantity - quantity;
+      sourceItem.quantidade = sourceItem.quantidade - quantidade;
     }
   }
   return;
